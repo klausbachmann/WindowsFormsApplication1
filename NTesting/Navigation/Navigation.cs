@@ -28,6 +28,7 @@ namespace NTesting.Navigation
         {
             driver = new ChromeDriver(Directory.GetCurrentDirectory());
             driver.Url = "http://www.pro7.de";
+
         }
 
         [Test]
