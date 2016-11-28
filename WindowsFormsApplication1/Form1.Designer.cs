@@ -32,6 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new MetroFramework.Controls.MetroGrid();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new MetroFramework.Controls.MetroTabControl();
@@ -114,13 +117,15 @@
             this.txtTimerValue = new System.Windows.Forms.TextBox();
             this.lblTimer = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.metroButton3 = new MetroFramework.Controls.MetroButton();
+            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.metroComboBox2 = new MetroFramework.Controls.MetroComboBox();
             this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
-            this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
-            this.metroButton3 = new MetroFramework.Controls.MetroButton();
+            this.gridFoundCruises = new MetroFramework.Controls.MetroGrid();
+            this.txtCruiseDays = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -139,6 +144,7 @@
             this.groupBox1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFoundCruises)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -1022,6 +1028,8 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.txtCruiseDays);
+            this.tabPage6.Controls.Add(this.gridFoundCruises);
             this.tabPage6.Controls.Add(this.metroButton3);
             this.tabPage6.Controls.Add(this.metroTextBox1);
             this.tabPage6.Controls.Add(this.metroButton2);
@@ -1031,6 +1039,58 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "FrontEnd Test";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // metroButton3
+            // 
+            this.metroButton3.Location = new System.Drawing.Point(231, 10);
+            this.metroButton3.Name = "metroButton3";
+            this.metroButton3.Size = new System.Drawing.Size(76, 23);
+            this.metroButton3.TabIndex = 2;
+            this.metroButton3.Text = "metroButton3";
+            this.metroButton3.UseSelectable = true;
+            this.metroButton3.Click += new System.EventHandler(this.metroButton3_Click);
+            // 
+            // metroTextBox1
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox1.CustomButton.Image = null;
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(54, 1);
+            this.metroTextBox1.CustomButton.Name = "";
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox1.CustomButton.TabIndex = 1;
+            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox1.CustomButton.UseSelectable = true;
+            this.metroTextBox1.CustomButton.Visible = false;
+            this.metroTextBox1.Lines = new string[] {
+        "metroTextBox1"};
+            this.metroTextBox1.Location = new System.Drawing.Point(151, 10);
+            this.metroTextBox1.MaxLength = 32767;
+            this.metroTextBox1.Name = "metroTextBox1";
+            this.metroTextBox1.PasswordChar = '\0';
+            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox1.SelectedText = "";
+            this.metroTextBox1.SelectionLength = 0;
+            this.metroTextBox1.SelectionStart = 0;
+            this.metroTextBox1.ShortcutsEnabled = true;
+            this.metroTextBox1.Size = new System.Drawing.Size(76, 23);
+            this.metroTextBox1.TabIndex = 1;
+            this.metroTextBox1.Text = "metroTextBox1";
+            this.metroTextBox1.UseSelectable = true;
+            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroButton2
+            // 
+            this.metroButton2.Location = new System.Drawing.Point(41, 10);
+            this.metroButton2.Name = "metroButton2";
+            this.metroButton2.Size = new System.Drawing.Size(76, 23);
+            this.metroButton2.TabIndex = 0;
+            this.metroButton2.Text = "metroButton2";
+            this.metroButton2.UseSelectable = true;
+            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
             // 
             // metroComboBox2
             // 
@@ -1073,57 +1133,78 @@
             this.metroStyleManager1.Owner = this;
             this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Green;
             // 
-            // metroButton2
+            // gridFoundCruises
             // 
-            this.metroButton2.Location = new System.Drawing.Point(57, 249);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(75, 23);
-            this.metroButton2.TabIndex = 0;
-            this.metroButton2.Text = "metroButton2";
-            this.metroButton2.UseSelectable = true;
-            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
+            this.gridFoundCruises.AllowUserToResizeRows = false;
+            this.gridFoundCruises.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gridFoundCruises.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gridFoundCruises.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gridFoundCruises.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFoundCruises.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.gridFoundCruises.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridFoundCruises.DefaultCellStyle = dataGridViewCellStyle11;
+            this.gridFoundCruises.EnableHeadersVisualStyles = false;
+            this.gridFoundCruises.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gridFoundCruises.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gridFoundCruises.Location = new System.Drawing.Point(10, 58);
+            this.gridFoundCruises.Name = "gridFoundCruises";
+            this.gridFoundCruises.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridFoundCruises.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.gridFoundCruises.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gridFoundCruises.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridFoundCruises.Size = new System.Drawing.Size(771, 330);
+            this.gridFoundCruises.TabIndex = 3;
             // 
-            // metroTextBox1
+            // txtCruiseDays
             // 
             // 
             // 
             // 
-            this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(53, 1);
-            this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox1.CustomButton.TabIndex = 1;
-            this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox1.CustomButton.UseSelectable = true;
-            this.metroTextBox1.CustomButton.Visible = false;
-            this.metroTextBox1.Lines = new string[] {
-        "metroTextBox1"};
-            this.metroTextBox1.Location = new System.Drawing.Point(58, 278);
-            this.metroTextBox1.MaxLength = 32767;
-            this.metroTextBox1.Name = "metroTextBox1";
-            this.metroTextBox1.PasswordChar = '\0';
-            this.metroTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox1.SelectedText = "";
-            this.metroTextBox1.SelectionLength = 0;
-            this.metroTextBox1.SelectionStart = 0;
-            this.metroTextBox1.ShortcutsEnabled = true;
-            this.metroTextBox1.Size = new System.Drawing.Size(75, 23);
-            this.metroTextBox1.TabIndex = 1;
-            this.metroTextBox1.Text = "metroTextBox1";
-            this.metroTextBox1.UseSelectable = true;
-            this.metroTextBox1.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox1.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroButton3
-            // 
-            this.metroButton3.Location = new System.Drawing.Point(151, 283);
-            this.metroButton3.Name = "metroButton3";
-            this.metroButton3.Size = new System.Drawing.Size(75, 23);
-            this.metroButton3.TabIndex = 2;
-            this.metroButton3.Text = "metroButton3";
-            this.metroButton3.UseSelectable = true;
-            this.metroButton3.Click += new System.EventHandler(this.metroButton3_Click);
+            this.txtCruiseDays.CustomButton.Image = null;
+            this.txtCruiseDays.CustomButton.Location = new System.Drawing.Point(3, 1);
+            this.txtCruiseDays.CustomButton.Name = "";
+            this.txtCruiseDays.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtCruiseDays.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtCruiseDays.CustomButton.TabIndex = 1;
+            this.txtCruiseDays.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtCruiseDays.CustomButton.UseSelectable = true;
+            this.txtCruiseDays.CustomButton.Visible = false;
+            this.txtCruiseDays.Lines = new string[0];
+            this.txtCruiseDays.Location = new System.Drawing.Point(10, 10);
+            this.txtCruiseDays.MaxLength = 32767;
+            this.txtCruiseDays.Name = "txtCruiseDays";
+            this.txtCruiseDays.PasswordChar = '\0';
+            this.txtCruiseDays.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCruiseDays.SelectedText = "";
+            this.txtCruiseDays.SelectionLength = 0;
+            this.txtCruiseDays.SelectionStart = 0;
+            this.txtCruiseDays.ShortcutsEnabled = true;
+            this.txtCruiseDays.Size = new System.Drawing.Size(25, 23);
+            this.txtCruiseDays.TabIndex = 4;
+            this.txtCruiseDays.UseSelectable = true;
+            this.txtCruiseDays.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtCruiseDays.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // Form1
             // 
@@ -1164,6 +1245,7 @@
             this.groupBox1.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFoundCruises)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1261,6 +1343,8 @@
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton metroButton3;
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
+        private MetroFramework.Controls.MetroGrid gridFoundCruises;
+        private MetroFramework.Controls.MetroTextBox txtCruiseDays;
     }
 }
 
