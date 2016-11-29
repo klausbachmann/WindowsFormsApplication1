@@ -16,6 +16,5 @@ namespace NTesting.Navigation
             driver.Url = "http://www.rtl.de";
 
         }
-
     }
 }

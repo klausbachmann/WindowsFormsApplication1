@@ -61,13 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Basictest.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Navigation\Newsletter.cs" />
     <Compile Include="Navigation\Navigation.cs" />
     <Compile Include="Program.cs" />

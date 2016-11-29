@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using help = NTesting.Helpers.Helpers;
 
 namespace NTesting
 {
@@ -108,6 +109,54 @@ namespace NTesting
             public string asserts { get; set; }
             public string message { get; set; }
             public string stacktrace { get; set; }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                DateTime input = DateTime.Parse(textBox1.Text);
+              
+                Console.WriteLine("Day: {0} DayOfWeek: {1} Month: {2}", input.Day, input.DayOfWeek, input.Month);
+                textBox2.Text = string.Format("{0}, {1}.{2}.{3}", help.getDayName(input.DayOfWeek), input.Day, input.Month, input.Year);
+            }
+            catch (Exception ec) {
+                textBox2.Text = "Ungültig!";
+            }
+        }
+
+        public string getDayName2(DayOfWeek dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return "Mo";
+                case DayOfWeek.Tuesday:
+                    return "Di";
+                case DayOfWeek.Wednesday:
+                    return "Mi";
+                case DayOfWeek.Thursday:
+                    return "Do";
+                case DayOfWeek.Friday:
+                    return "Fr";
+                case DayOfWeek.Saturday:
+                    return "Sa";
+                case DayOfWeek.Sunday:
+                    return "So";
+
+                default: return "Mo";
+            }
         }
     }
 }
