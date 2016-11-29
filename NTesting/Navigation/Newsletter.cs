@@ -13,7 +13,7 @@ namespace NTesting.Navigation
         [Test]
         public void simpleExtendTest()
         {
-            driver.Url = "http://www.rtl.de";
+            driver.Url = "http://www.tuicruises.com";
 
         }
     }

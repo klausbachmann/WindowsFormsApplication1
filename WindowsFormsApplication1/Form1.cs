@@ -382,7 +382,7 @@ namespace WindowsFormsApplication1
             */
 
 
-            selectMaxDays(driver, 5);
+            selectMaxDays(driver, Int32.Parse(txtCruiseDays.Text));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("searchoptionblocker")));
 
             driver.FindElement(By.Id("startingPort-6")).Click();
@@ -394,6 +394,67 @@ namespace WindowsFormsApplication1
 
             IList<IWebElement> clearedlist = getRealReisen(reisen);
             Console.WriteLine("Cleared: {0}", clearedlist.Count);
+
+            IList<CruiseData> rawData = getCruiseData(clearedlist);
+            gridFoundCruises.DataSource = rawData;
+
+            driver.Quit();
+        }
+
+        public IList<CruiseData> getCruiseData(IList<IWebElement> clearedList)
+        {
+            IList<CruiseData> cruiseDataList = new List<CruiseData>();
+            foreach (IWebElement element in clearedList)
+            {
+                CruiseData cd = new CruiseData();
+                cd.cruise = element.FindElement(By.CssSelector("a > span > span.details-body > h4")).Text;
+
+                try
+                {
+                    //IWebElement tryer = element.FindElement(By.CssSelector("[class='fully-booked'][style='display: none']"));
+                    cd.price = element.FindElement(By.CssSelector("[class='cruiseOnly price']")).Text;
+                }
+                catch
+                {
+                    cd.price = element.FindElement(By.CssSelector("[class='fully-booked']")).Text;
+                }
+
+                cd.ship = element.FindElement(By.CssSelector("[class='ship']")).Text;
+
+                cruiseDataList.Add(cd);
+            }
+
+
+            /*
+
+            AUSGEBUCHT
+
+            < span class="price-info" style="display: block;"> 
+                <p><strong class="fully-booked"> Aktuell nicht buchbar</strong></p> 
+            </span>
+
+
+
+            < span class="price-info" style="display: block;"> 
+                <p><span class="price-hint">z.B. </span>
+                <b class="cabin">Balkonkabine</b>
+                <span class="fully-booked" style="display: none;"> ausgebucht</span> 
+                <span>ab<b><em class="cruiseOnly price">1.199</em> €</b></span></p> 
+            </span>
+
+
+    */
+
+
+
+            return cruiseDataList;
+        }
+
+        public class CruiseData
+        {
+            public string cruise { get; set; }
+            public string ship { get; set; }
+            public string price { get; set; }
         }
 
         public IList<IWebElement> getRealReisen(IList<IWebElement> liste)

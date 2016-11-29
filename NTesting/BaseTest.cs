@@ -14,12 +14,14 @@ namespace NTesting
     [TestFixture]
     class BaseTest
     {
+
         protected IWebDriver driver;
         protected WebDriverWait wait;
 
         [SetUp]
         public void setup(IWebDriver driver)
         {
+
             driver = new ChromeDriver(Directory.GetCurrentDirectory());
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
