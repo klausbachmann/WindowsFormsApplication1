@@ -398,7 +398,25 @@ namespace WindowsFormsApplication1
             IList<CruiseData> rawData = getCruiseData(clearedlist);
             gridFoundCruises.DataSource = rawData;
 
-           // driver.Quit();
+            IList<CruiseData> compareList = new List<CruiseData>();
+            CruiseData m = new CruiseData();
+            m.cruise = "Hello";
+            m.ship = "Mein Schiff 9";
+            compareList.Add(m);
+
+            compareList = rawData;
+            compareList.Reverse();
+
+            if (compareList.Equals(rawData))
+            {
+                Console.WriteLine("GLEICH");
+            }
+            else
+            {
+                Console.WriteLine("NEIN");
+            }
+
+            // driver.Quit();
         }
 
         public IList<CruiseData> getCruiseData(IList<IWebElement> clearedList)
@@ -438,9 +456,10 @@ namespace WindowsFormsApplication1
             List<IWebElement> realList = new List<IWebElement>();
             foreach (IWebElement e in liste)
             {
-                if (e.GetAttribute("style").Equals("")) {
+                if (e.GetAttribute("style").Equals(""))
+                {
                     realList.Add(e);
-                }    
+                }
             }
             return realList;
         }
@@ -450,7 +469,7 @@ namespace WindowsFormsApplication1
         {
             Actions action = new Actions(driver);
             int offset = Helper.getOffset(day);
-            action.ClickAndHold(driver.FindElement(By.CssSelector("div.noUiSlider.noUi-target.noUi-ltr.noUi-horizontal.noUi-background > div > div:nth-child(2)"))).MoveByOffset(offset,0).Release();
+            action.ClickAndHold(driver.FindElement(By.CssSelector("div.noUiSlider.noUi-target.noUi-ltr.noUi-horizontal.noUi-background > div > div:nth-child(2)"))).MoveByOffset(offset, 0).Release();
             action.Perform();
         }
 
