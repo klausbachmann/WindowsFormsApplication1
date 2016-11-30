@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TuicContentLoader;
 using Excel = Microsoft.Office.Interop.Excel;
+using Helper = TuicContentLoader.Helpers.Helper;
 
 namespace WindowsFormsApplication1
 {
@@ -387,7 +388,6 @@ namespace WindowsFormsApplication1
 
             driver.FindElement(By.Id("startingPort-6")).Click();
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("searchoptionblocker")));
-            //driver.Quit();
 
             IList<IWebElement> reisen = driver.FindElements(By.CssSelector("div[class='route-item']"));
             Console.WriteLine("Anzahl der Reisen: {0}", reisen.Count);
@@ -398,7 +398,7 @@ namespace WindowsFormsApplication1
             IList<CruiseData> rawData = getCruiseData(clearedlist);
             gridFoundCruises.DataSource = rawData;
 
-            driver.Quit();
+           // driver.Quit();
         }
 
         public IList<CruiseData> getCruiseData(IList<IWebElement> clearedList)
@@ -411,7 +411,6 @@ namespace WindowsFormsApplication1
 
                 try
                 {
-                    //IWebElement tryer = element.FindElement(By.CssSelector("[class='fully-booked'][style='display: none']"));
                     cd.price = element.FindElement(By.CssSelector("[class='cruiseOnly price']")).Text;
                 }
                 catch
@@ -423,29 +422,6 @@ namespace WindowsFormsApplication1
 
                 cruiseDataList.Add(cd);
             }
-
-
-            /*
-
-            AUSGEBUCHT
-
-            < span class="price-info" style="display: block;"> 
-                <p><strong class="fully-booked"> Aktuell nicht buchbar</strong></p> 
-            </span>
-
-
-
-            < span class="price-info" style="display: block;"> 
-                <p><span class="price-hint">z.B. </span>
-                <b class="cabin">Balkonkabine</b>
-                <span class="fully-booked" style="display: none;"> ausgebucht</span> 
-                <span>ab<b><em class="cruiseOnly price">1.199</em> €</b></span></p> 
-            </span>
-
-
-    */
-
-
 
             return cruiseDataList;
         }
@@ -462,7 +438,6 @@ namespace WindowsFormsApplication1
             List<IWebElement> realList = new List<IWebElement>();
             foreach (IWebElement e in liste)
             {
-                Console.WriteLine(e.GetAttribute("style"));
                 if (e.GetAttribute("style").Equals("")) {
                     realList.Add(e);
                 }    
@@ -473,45 +448,8 @@ namespace WindowsFormsApplication1
 
         public void selectMaxDays(IWebDriver driver, int day)
         {
-            int offset = 0;
             Actions action = new Actions(driver);
-            switch (day)
-            {
-                case 3:
-                    offset = -630;
-                    break;
-                case 4:
-                    offset = -610;
-                    break;
-                case 5:
-                    offset = -590;
-                    break;
-                case 6:
-                    offset = -575;
-                    break;
-                case 7:
-                    offset = -560;
-                    break;
-                case 8:
-                    offset = -545;
-                    break;
-                case 9:
-                    offset = -530;
-                    break;
-                case 10:
-                    offset = -510;
-                    break;
-                case 11:
-                    offset = -495;
-                    break;
-                case 12:
-                    offset = -480;
-                    break;
-                case 13:
-                    offset = -465;
-                    break;
-            }
-
+            int offset = Helper.getOffset(day);
             action.ClickAndHold(driver.FindElement(By.CssSelector("div.noUiSlider.noUi-target.noUi-ltr.noUi-horizontal.noUi-background > div > div:nth-child(2)"))).MoveByOffset(offset,0).Release();
             action.Perform();
         }
