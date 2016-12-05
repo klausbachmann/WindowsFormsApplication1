@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ClosedXML.Excel;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -57,7 +58,6 @@ namespace WindowsFormsApplication1
             else
             {
                 dataGridView1.DataSource = trips;
-
             }
 
             dataGridView1.AutoResizeColumns();
@@ -81,7 +81,6 @@ namespace WindowsFormsApplication1
                 lblTripsArrow.Text = "m";
             }
             Console.WriteLine("SUM: " + sum / 10000000);
-
         }
 
         // Routes laden
@@ -200,9 +199,6 @@ namespace WindowsFormsApplication1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
-            Console.WriteLine(time--);
-
             lblTimer.Text = Convert.ToString(time);
             progressBar1.Value = time;
             if (time == 0)
@@ -213,7 +209,6 @@ namespace WindowsFormsApplication1
                 button4_Click(sender, e);
                 button5_Click_1(sender, e);
                 time = int.Parse(txtTimerValue.Text);
-
             }
         }
 
@@ -288,7 +283,6 @@ namespace WindowsFormsApplication1
             dataGridView1.AutoResizeColumns();
             dataGridView1.ResumeLayout();
             loader.quit();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -309,11 +303,11 @@ namespace WindowsFormsApplication1
             TuicContentLoader.Settings1 settings = new Settings1();
             settings.timerValue = txtTimerValue.Text;
             settings.Save();
-        }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
+            if (driver != null)
+            {
+                driver.Quit();
+            }
         }
 
         private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -383,7 +377,15 @@ namespace WindowsFormsApplication1
             */
 
 
-            selectMaxDays(driver, Int32.Parse(txtCruiseDays.Text));
+            try
+            {
+                selectMaxDays(driver, Int32.Parse(txtCruiseDays.Text));
+            }
+            catch (Exception exception)
+            {
+                selectMaxDays(driver, 42);
+            }
+
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("searchoptionblocker")));
 
             driver.FindElement(By.Id("startingPort-6")).Click();
@@ -398,16 +400,17 @@ namespace WindowsFormsApplication1
             IList<CruiseData> rawData = getCruiseData(clearedlist);
             gridFoundCruises.DataSource = rawData;
 
-            IList<CruiseData> compareList = new List<CruiseData>();
-            CruiseData m = new CruiseData();
-            m.cruise = "Hello";
-            m.ship = "Mein Schiff 9";
-            compareList.Add(m);
+            IList<CruiseData> compareList = ExcelLoader.getCruisedataFromExcel();
+            Console.WriteLine("SIZE COMPARELIST: {0}", compareList.Count);
 
-            compareList = rawData;
-            compareList.Reverse();
+            var enumList = compareList.Except(rawData).ToList();
+            var enumList2 = rawData.Except(compareList).ToList();
+            Console.WriteLine("ENUMLIST COUNT: " + enumList.Count);
+            Console.WriteLine("ENUMLIST2 COUNT: " + enumList2.Count);
 
-            if (compareList.Equals(rawData))
+            //var diffList = getDiffList(compareList, rawData);
+
+            if (compareList.Equals(ExcelLoader.getCruisedataFromExcel()))
             {
                 Console.WriteLine("GLEICH");
             }
@@ -417,6 +420,20 @@ namespace WindowsFormsApplication1
             }
 
             // driver.Quit();
+        }
+
+        public IList<CruiseData> getDiffList(IList<CruiseData> one, IList<CruiseData> two)
+        {
+            List<CruiseData> diffList = new List<CruiseData>();
+            for (int i = 0; i < one.Count; i++)
+            {
+                if (!one.ElementAt(i).Equals(two.ElementAt(i)))
+                {
+                    diffList.Add(two.ElementAt(i));
+                }
+            }
+
+            return diffList;
         }
 
         public IList<CruiseData> getCruiseData(IList<IWebElement> clearedList)
@@ -467,15 +484,41 @@ namespace WindowsFormsApplication1
 
         public void selectMaxDays(IWebDriver driver, int day)
         {
-            Actions action = new Actions(driver);
-            int offset = Helper.getOffset(day);
-            action.ClickAndHold(driver.FindElement(By.CssSelector("div.noUiSlider.noUi-target.noUi-ltr.noUi-horizontal.noUi-background > div > div:nth-child(2)"))).MoveByOffset(offset, 0).Release();
-            action.Perform();
+            try
+            {
+                Actions action = new Actions(driver);
+                int offset = Helper.getOffset(day);
+                action.ClickAndHold(driver.FindElement(By.CssSelector("div.noUiSlider.noUi-target.noUi-ltr.noUi-horizontal.noUi-background > div > div:nth-child(2)"))).MoveByOffset(offset, 0).Release();
+                action.Perform();
+            }
+            catch (Exception exception) { Console.WriteLine(exception); }
+
+
         }
 
         private void metroButton3_Click(object sender, EventArgs e)
         {
-            selectMaxDays(driver, Int32.Parse(metroTextBox1.Text));
+            try
+            {
+                selectMaxDays(driver, Int32.Parse(metroTextBox1.Text));
+            }
+            catch (ArgumentNullException ane)
+            {
+                MessageBox.Show("Bitte nur eine Zahl in das Feld eingeben", "ArgumentNullException", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException fe)
+            {
+                MessageBox.Show("Bitte nur eine Zahl in das Feld eingeben", "FormatException", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (OverflowException eo)
+            {
+                MessageBox.Show("Bitte nur eine Zahl in das Feld eingeben", "OverflowException", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void metroButton4_Click(object sender, EventArgs e)
+        {
+            var cruisedataList = ExcelLoader.getCruisedataFromExcel();
         }
     }
 }

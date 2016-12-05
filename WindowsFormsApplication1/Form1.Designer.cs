@@ -126,6 +126,7 @@
             this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.metroButton4 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -727,7 +728,6 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ladezeiten";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // label29
             // 
@@ -1028,6 +1028,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.metroButton4);
             this.tabPage6.Controls.Add(this.txtCruiseDays);
             this.tabPage6.Controls.Add(this.gridFoundCruises);
             this.tabPage6.Controls.Add(this.metroButton3);
@@ -1206,6 +1207,16 @@
             this.metroStyleManager1.Owner = this;
             this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Green;
             // 
+            // metroButton4
+            // 
+            this.metroButton4.Location = new System.Drawing.Point(481, 22);
+            this.metroButton4.Name = "metroButton4";
+            this.metroButton4.Size = new System.Drawing.Size(75, 23);
+            this.metroButton4.TabIndex = 5;
+            this.metroButton4.Text = "metroButton4";
+            this.metroButton4.UseSelectable = true;
+            this.metroButton4.Click += new System.EventHandler(this.metroButton4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1345,6 +1356,7 @@
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private MetroFramework.Controls.MetroGrid gridFoundCruises;
         private MetroFramework.Controls.MetroTextBox txtCruiseDays;
+        private MetroFramework.Controls.MetroButton metroButton4;
     }
 }
 
